@@ -29,13 +29,7 @@ export default class BaseClass {
     private async addBaseClass() {
         const targetDirectory = path.join(process.cwd(), "webapp", "lib", "core");
         const targetPath = path.join(targetDirectory, "Base.ts");
-        const classExists = await Util.pathExists(targetPath);
         const directoryExists = await Util.pathExists(targetDirectory);
-
-        if (classExists) {
-            throw new Error("The Base class already exists in the following path: " + targetDirectory);
-        }
-
         const templatePath = path.join(__dirname, "..", "..", "template", "class", "core", "Base.ts.tpl");
         const template = await readFile(templatePath, "utf-8");
         const content = this.replaceContent(template);

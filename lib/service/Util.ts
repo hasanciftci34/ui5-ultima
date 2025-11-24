@@ -9,4 +9,8 @@ export default class Util {
             return false;
         }
     }
+
+    public static getCommandDescription(description: string) {
+        return description.trimEnd() + "\n";
+    }
 }

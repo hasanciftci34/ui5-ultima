@@ -3,6 +3,7 @@
 import { program } from "commander";
 import generate from "./command/generate";
 import addView from "./command/add-view";
+import addBaseController from "./command/add-base-controller";
 import addFragment from "./command/add-fragment";
 import addBaseClass from "./command/add-base-class";
 
@@ -17,6 +18,7 @@ program
 program
     .addCommand(generate)
     .addCommand(addView)
+    .addCommand(addBaseController)
     .addCommand(addFragment)
     .addCommand(addBaseClass);
 
