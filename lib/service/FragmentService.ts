@@ -4,7 +4,7 @@ import path from "path";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import Util from "./Util";
 
-export default class BaseClass {
+export default class FragmentService {
     private manifest = new Manifest();
     private namespace: string;
     private ui5Path: string;
@@ -14,23 +14,23 @@ export default class BaseClass {
             this.namespace = await this.manifest.getNamespace();
             this.ui5Path = this.manifest.getUI5Path(this.namespace);
 
-            consola.start("Generating the Base class...");
+            consola.start("Generating the FragmentService class...");
 
-            await this.addBaseClass();
-            await this.addBaseClassType();
+            await this.addFragmentServiceClass();
+            await this.addFragmentServiceClassType();
             await this.addCustomClassType();
 
-            consola.success("UI5 Ultima has successfully generated the Base class!");
+            consola.success("UI5 Ultima has successfully generated the FragmentService class!");
         } catch (error) {
             consola.error(error);
         }
     }
 
-    private async addBaseClass() {
+    private async addFragmentServiceClass() {
         const targetDirectory = path.join(process.cwd(), "webapp", "lib", "core");
-        const targetPath = path.join(targetDirectory, "Base.ts");
+        const targetPath = path.join(targetDirectory, "FragmentService.ts");
         const directoryExists = await Util.pathExists(targetDirectory);
-        const templatePath = path.join(__dirname, "..", "..", "template", "class", "core", "Base.ts.tpl");
+        const templatePath = path.join(__dirname, "..", "..", "template", "class", "core", "FragmentService.ts.tpl");
         const template = await readFile(templatePath, "utf-8");
         const content = this.replaceContent(template);
 
@@ -39,15 +39,15 @@ export default class BaseClass {
             await mkdir(targetDirectory, { recursive: true });
         }
 
-        consola.info("Generating Base.ts file...");
+        consola.info("Generating FragmentService.ts file...");
         await writeFile(targetPath, content);
     }
 
-    private async addBaseClassType() {
+    private async addFragmentServiceClassType() {
         const targetDirectory = path.join(process.cwd(), "webapp", "types", "core");
-        const targetPath = path.join(targetDirectory, "Base.types.ts");
+        const targetPath = path.join(targetDirectory, "FragmentService.types.ts");
         const directoryExists = await Util.pathExists(targetDirectory);
-        const templatePath = path.join(__dirname, "..", "..", "template", "types", "core", "Base.types.ts.tpl");
+        const templatePath = path.join(__dirname, "..", "..", "template", "types", "core", "FragmentService.types.ts.tpl");
         const template = await readFile(templatePath, "utf-8");
         const content = this.replaceContent(template);
 
@@ -56,7 +56,7 @@ export default class BaseClass {
             await mkdir(targetDirectory, { recursive: true });
         }
 
-        consola.info("Generating Base.types.ts file...");
+        consola.info("Generating FragmentService.types.ts file...");
         await writeFile(targetPath, content);
     }
 

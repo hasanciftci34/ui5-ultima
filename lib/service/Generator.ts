@@ -238,7 +238,7 @@ export default class Generator {
 
     private async includeFragmentClass() {
         return confirm({
-            message: "Would you like to include the Fragment class? (default: Y):",
+            message: "Would you like to include the FragmentService class? (default: Y):",
             default: true
         });
     }
